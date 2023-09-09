@@ -1,0 +1,23 @@
+{
+    "legacy_addon_id": "",
+    "title": "CISPay Addon",
+    "description": "Аддон для приема платежей через CISPay",
+    "version_id": 1000070,
+    "version_string": "1.0",
+    "dev": "CISPay",
+    "dev_url": "https://cispay.pro",
+    "faq_url": "",
+    "support_url": "",
+    "extra_urls": {},
+    "require": {
+        "php": [
+            "7.1",
+            "PHP 7.1+"
+        ],
+        "XF": [
+            2010070,
+            "XenForo 2.1.0+"
+        ]
+    },
+    "icon": "icon.png"
+}
