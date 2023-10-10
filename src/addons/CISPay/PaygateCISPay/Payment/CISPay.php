@@ -68,7 +68,6 @@ class CISPay extends AbstractProvider
 				'custom_fields'  => $purchaseRequest->request_key,
 				'hook_url'    => $this->getCallbackUrl(),
 				'expire'    => 1900,
-				'method' => 'card'
 			];
 		} else {
 			return [
@@ -78,7 +77,6 @@ class CISPay extends AbstractProvider
 				'custom_fields'  => $purchaseRequest->request_key,
 				'hook_url'    => $this->getCallbackUrl(),
 				'expire'    => 1900,
-				'method' => 'card'
 			];
 		}
 	}
