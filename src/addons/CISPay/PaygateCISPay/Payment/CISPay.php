@@ -81,7 +81,7 @@ class CISPay extends AbstractProvider
 	{
 		$payment = $this->getPaymentParams($purchaseRequest, $purchase);
 
-		if (empty($payment) || empty($this->callbackUrl)) {
+		if (empty($payment)) {
             return $controller->error(XF::phrase('something_went_wrong_please_try_again'));
         }
 
