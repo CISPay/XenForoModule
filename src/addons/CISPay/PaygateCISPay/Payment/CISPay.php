@@ -26,7 +26,7 @@ class CISPay extends AbstractProvider
 	 */
 	public function getApiEndpoint(): string
 	{
-		return 'https://api.cispay.pro/';
+		return 'https://api.cispay.pro';
 	}
 
 	/**
@@ -60,25 +60,14 @@ class CISPay extends AbstractProvider
 	{
 		$paymentProfileOptions = $purchase->paymentProfile->options;
 
-		if (strpos(round($purchase->cost, 2), '.') !== false) {
-			return [
-				'shop_to' => $paymentProfileOptions['shop_uuid'],
-				'sum'       => round($purchase->cost, 2),
-				'comment'   => $purchase->title,
-				'custom_fields'  => $purchaseRequest->request_key,
-				'hook_url'    => $this->getCallbackUrl(),
-				'expire'    => 1900,
-			];
-		} else {
-			return [
-				'shop_to' => $paymentProfileOptions['shop_uuid'],
-				'sum'       => round($purchase->cost, 2).'.00',
-				'comment'   => $purchase->title,
-				'custom_fields'  => $purchaseRequest->request_key,
-				'hook_url'    => $this->getCallbackUrl(),
-				'expire'    => 1900,
-			];
-		}
+		return [
+			'shop_to' => $paymentProfileOptions['shop_uuid'],
+			'sum'       => number_format($purchase->cost, 2),
+			'comment'   => $purchase->title,
+			'custom_fields'  => $purchaseRequest->request_key,
+			'hook_url'    => $this->getCallbackUrl(),
+			'expire'    => 1900,
+		];
 	}
 
 	/**
@@ -92,8 +81,12 @@ class CISPay extends AbstractProvider
 	{
 		$payment = $this->getPaymentParams($purchaseRequest, $purchase);
 
+		if (empty($payment) || empty($this->callbackUrl)) {
+            return $controller->error(XF::phrase('something_went_wrong_please_try_again'));
+        }
+
 		// Запрос на создание инвойса
-		$response = XF::app()->http()->client()->post($this->getApiEndpoint() . 'payment/create', [
+		$response = XF::app()->http()->client()->post($this->getApiEndpoint() . '/payment/create', [
 			'json' => $payment,
 			'exceptions'  => false
 		]);
