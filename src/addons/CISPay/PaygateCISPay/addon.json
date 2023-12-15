@@ -3,7 +3,7 @@
     "title": "CISPay Addon",
     "description": "Аддон для приема платежей через CISPay",
     "version_id": 1000070,
-    "version_string": "1.1",
+    "version_string": "1.2",
     "dev": "CISPay",
     "dev_url": "https://cispay.pro",
     "faq_url": "",
