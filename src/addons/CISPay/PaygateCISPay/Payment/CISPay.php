@@ -62,7 +62,7 @@ class CISPay extends AbstractProvider
 
 		return [
 			'shop_to' => $paymentProfileOptions['shop_uuid'],
-			'sum'       => number_format($purchase->cost, 2),
+			'sum'       => number_format($purchase->cost, 2, '.', ''),
 			'comment'   => $purchase->title,
 			'custom_fields'  => $purchaseRequest->request_key,
 			'hook_url'    => $this->getCallbackUrl(),
